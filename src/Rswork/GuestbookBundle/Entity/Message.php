@@ -3,6 +3,7 @@
 namespace Rswork\GuestbookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use \DateTime;
 
 /**
  * Message
@@ -48,6 +49,11 @@ class Message
      * @ORM\Column(name="content", type="text")
      */
     private $content;
+
+    public function __construct()
+    {
+        $this->published = new DateTime();
+    }
 
 
     /**

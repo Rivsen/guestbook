@@ -1,43 +1,40 @@
-<h1>Message list</h1>
+{% extends "RsworkGuestbookBundle::layout.html.twig" %}
 
-<table class="records_list">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Published</th>
-            <th>Content</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
+{% block title %} Message List {% endblock %}
+
+{% block body %}
+
+<div class="hero-unit">
+  <h1>Message list</h1>
+</div>
+
+<div class="row-fluid">
+
+  {% include 'RsworkGuestbookBundle:Message:sidebar.html.twig' with {'class': 'span2'} %}
+
+  <div class="span10">
+
     {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('guestbook_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.title }}</td>
-            <td>{{ entity.author }}</td>
-            <td>{% if entity.published %}{{ entity.published|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{{ entity.content }}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('guestbook_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('guestbook_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
 
-<ul>
-    <li>
-        <a href="{{ path('guestbook_new') }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
+    <div class="well">
+      <h2>{{ entity.title }}</h2>
+
+      <p class="info">
+      <i class="icon-user"></i> Author: <strong>{{ entity.author }}</strong> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <i class="icon-time"></i> Create Date: <strong>{{ entity.published|date('Y-m-d H:i:s') }}</strong>
+      </p>
+
+      <p>
+      {{ entity.content }}
+      </p>
+
+      <a href="{{ path('guestbook_show', { 'id': entity.id }) }}" class="btn">View Detail »</a>
+      <a href="{{ path('guestbook_edit', { 'id': entity.id }) }}" class="btn">Edit</a>
+    </div>
+
+    {% endfor %}
+
+  </div>
+</div>
+{% endblock %}

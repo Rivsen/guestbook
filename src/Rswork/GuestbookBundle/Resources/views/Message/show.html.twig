@@ -1,45 +1,38 @@
-<h1>Message</h1>
+{% extends "RsworkGuestbookBundle::layout.html.twig" %}
 
-<table class="record_properties">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Title</th>
-            <td>{{ entity.title }}</td>
-        </tr>
-        <tr>
-            <th>Author</th>
-            <td>{{ entity.author }}</td>
-        </tr>
-        <tr>
-            <th>Published</th>
-            <td>{{ entity.published|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Content</th>
-            <td>{{ entity.content }}</td>
-        </tr>
-    </tbody>
-</table>
+{% block title %} Message: {{ entity.title }} {% endblock %}
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('guestbook') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('guestbook_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('guestbook_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+{% block body %}
+<div class="hero-unit">
+  <h1>Message Detail</h1>
+</div>
+
+<div class="row-fluid">
+
+  {% include 'RsworkGuestbookBundle:Message:sidebar.html.twig' with {'class': 'span2'} %}
+
+  <div class="span10 well">
+
+    <h2>{{ entity.title }}</h2>
+
+    <p class="info">
+    <i class="icon-user"></i> Author: <strong>{{ entity.author }}</strong> 
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <i class="icon-time"></i> Create Date: <strong>{{ entity.published|date('Y-m-d H:i:s') }}</strong>
+    </p>
+
+    <p>
+    {{ entity.content }}
+    </p>
+
+      <a class="btn" href="{{ path('guestbook_edit', { 'id': entity.id }) }}">Edit</a>
+      <form action="{{ path('guestbook_delete', { 'id': entity.id }) }}" method="post" class="delete_button_form">
+        {{ form_widget(delete_form) }}
+        <button class="btn btn-danger" type="submit">Delete</button>
+      </form>
+
+  </div>
+
+</div>
+
+{% endblock %}

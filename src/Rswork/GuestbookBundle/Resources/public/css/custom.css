@@ -1,0 +1,7 @@
+.container {
+    max-width: 960px;
+}
+
+.delete_button_form {
+    display: inline;
+}

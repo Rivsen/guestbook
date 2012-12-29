@@ -1,0 +1,9 @@
+{% if class %}
+<div class="{{ class }}">
+{% else %}
+<div class="span2">
+{% endif %}
+
+  {{ knp_menu_render('RsworkGuestbookBundle:Builder:navTabs', {'nav_type': 'stacked_tabs'}) }}
+
+</div>

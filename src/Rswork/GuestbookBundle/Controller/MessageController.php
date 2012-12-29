@@ -135,7 +135,7 @@ class MessageController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('guestbook_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('guestbook_show', array('id' => $id)));
         }
 
         return $this->render('RsworkGuestbookBundle:Message:edit.html.twig', array(
