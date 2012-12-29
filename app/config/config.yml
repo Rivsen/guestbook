@@ -21,6 +21,14 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    form:
+        resources:
+            - "BraincraftedBootstrapBundle:Form:form_div_layout.html.twig"
+
+# Knp Menu Configuration
+knp_menu:
+    twig:
+        template: "BraincraftedBootstrapBundle:Menu:menu.html.twig"
 
 # Assetic Configuration
 assetic:
