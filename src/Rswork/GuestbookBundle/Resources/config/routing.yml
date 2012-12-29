@@ -1,3 +1,7 @@
 rswork_guestbook_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: RsworkGuestbookBundle:Default:index }
+
+RsworkGuestbookBundle_guestbook:
+    resource: "@RsworkGuestbookBundle/Resources/config/routing/message.yml"
+    prefix:   /guestbook

@@ -1,0 +1,30 @@
+guestbook:
+    pattern:  /
+    defaults: { _controller: "RsworkGuestbookBundle:Message:index" }
+
+guestbook_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "RsworkGuestbookBundle:Message:show" }
+
+guestbook_new:
+    pattern:  /new
+    defaults: { _controller: "RsworkGuestbookBundle:Message:new" }
+
+guestbook_create:
+    pattern:  /create
+    defaults: { _controller: "RsworkGuestbookBundle:Message:create" }
+    requirements: { _method: post }
+
+guestbook_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "RsworkGuestbookBundle:Message:edit" }
+
+guestbook_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "RsworkGuestbookBundle:Message:update" }
+    requirements: { _method: post }
+
+guestbook_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "RsworkGuestbookBundle:Message:delete" }
+    requirements: { _method: post }
