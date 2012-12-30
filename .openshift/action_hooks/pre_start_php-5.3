@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# The pre_start_cartridge and pre_stop_cartridge hooks are *SOURCED*
+# immediately before (re)starting or stopping the specified cartridge.
+# They are able to make any desired environment variable changes as
+# well as other adjustments to the application environment.
+
+# The post_start_cartridge and post_stop_cartridge hooks are executed
+# immediately after (re)starting or stopping the specified cartridge.
+
+# Exercise caution when adding commands to these hooks.  They can
+# prevent your application from stopping cleanly or starting at all.
+# Application start and stop is subject to different timeouts
+# throughout the system.
+
+#export SYMFONY_DATABASE_HOST=$OPENSHIFT_MYSQL_DB_HOST
+#export SYMFONY_DATABASE_PORT=$OPENSHIFT_MYSQL_DB_PORT
+
+#cd $OPENSHIFT_REPO_DIR
+#curl -s https://getcomposer.org/installer | php
+#mv composer.phar libs/composer
+
+if [ ! -d "$OPENSHIFT_DATA_DIR/vendor" ] && [ ! -d "$OPENSHIFT_REPO_DIR/vendor" ] && [ ! -L "$OPENSHIFT_REPO_DIR/vendor" ]; then
+    php -c ~/php-5.3/conf $OPENSHIFT_REPO_DIR/libs/composer install --prefer-dist -d $OPENSHIFT_REPO_DIR
+    mv $OPENSHIFT_REPO_DIR/vendor $OPENSHIFT_DATA_DIR
+    ln -s $OPENSHIFT_DATA_DIR/vendor $OPENSHIFT_REPO_DIR
+    echo "Vendor folder Installed!"
+elif [ -d "$OPENSHIFT_DATA_DIR/vendor" ] && [ -d "$OPENSHIFT_REPO_DIR/vendor" ]; then
+    rm -rf $OPENSHIFT_REPO_DIR/vendor
+    ln -s $OPENSHIFT_DATA_DIR/vendor $OPENSHIFT_REPO_DIR
+    php -c ~/php-5.3/conf $OPENSHIFT_REPO_DIR/libs/composer install --prefer-dist -d $OPENSHIFT_REPO_DIR
+    echo "Vendor folder Installed!"
+elif [ -d "$OPENSHIFT_DATA_DIR/vendor" ] && [ -L "$OPENSHIFT_REPO_DIR/vendor" ]; then
+    php -c ~/php-5.3/conf $OPENSHIFT_REPO_DIR/libs/composer install --prefer-dist -d $OPENSHIFT_REPO_DIR
+    echo "Vendor folder Installed!"
+elif [ -d "$OPENSHIFT_DATA_DIR/vendor" ] && [ ! -L "$OPENSHIFT_REPO_DIR/vendor" ]; then
+    ln -s $OPENSHIFT_DATA_DIR/vendor $OPENSHIFT_REPO_DIR
+    php -c ~/php-5.3/conf $OPENSHIFT_REPO_DIR/libs/composer install --prefer-dist -d $OPENSHIFT_REPO_DIR
+    echo "Vendor folder Installed!"
+fi
+
+php -c ~/php-5.3/conf $OPENSHIFT_REPO_DIR/app/console doctrine:schema:update --force
+echo "Schema Updated!"
