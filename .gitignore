@@ -16,3 +16,4 @@ app/config/parameters.yml
 *.swap
 *.swp
 *.bak
+*~
