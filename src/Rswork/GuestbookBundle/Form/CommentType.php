@@ -13,8 +13,8 @@ class CommentType extends AbstractType
         $builder
             ->add('author')
             ->add('content')
-            ->add('message_id')
             ->add('published')
+            ->add('message_id')
         ;
     }
 

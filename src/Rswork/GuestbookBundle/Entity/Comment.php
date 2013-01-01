@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Comment
  *
- * @ORM\Table()
+ * @ORM\Table(name="comment")
  * @ORM\Entity(repositoryClass="Rswork\GuestbookBundle\Entity\CommentRepository")
  */
 class Comment
@@ -36,18 +36,17 @@ class Comment
     private $content;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="message_id", type="integer")
-     */
-    private $message_id;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="published", type="datetime")
      */
     private $published;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Message", inversedBy="comments")
+     * @ORM\JoinColumn(name="message_id", referencedColumnName="id")
+     */
+    protected $message_id;
 
 
     /**
@@ -107,29 +106,6 @@ class Comment
     }
 
     /**
-     * Set message_id
-     *
-     * @param integer $messageId
-     * @return Comment
-     */
-    public function setMessageId($messageId)
-    {
-        $this->message_id = $messageId;
-    
-        return $this;
-    }
-
-    /**
-     * Get message_id
-     *
-     * @return integer 
-     */
-    public function getMessageId()
-    {
-        return $this->message_id;
-    }
-
-    /**
      * Set published
      *
      * @param \DateTime $published
@@ -150,5 +126,28 @@ class Comment
     public function getPublished()
     {
         return $this->published;
+    }
+
+    /**
+     * Set message_id
+     *
+     * @param integer $messageId
+     * @return Comment
+     */
+    public function setMessageId($messageId)
+    {
+        $this->message_id = $messageId;
+    
+        return $this;
+    }
+
+    /**
+     * Get message_id
+     *
+     * @return integer 
+     */
+    public function getMessageId()
+    {
+        return $this->message_id;
     }
 }

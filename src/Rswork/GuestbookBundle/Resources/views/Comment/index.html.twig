@@ -6,7 +6,6 @@
             <th>Id</th>
             <th>Author</th>
             <th>Content</th>
-            <th>Message_id</th>
             <th>Published</th>
             <th>Actions</th>
         </tr>
@@ -17,7 +16,6 @@
             <td><a href="{{ path('guestbook_comment_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.author }}</td>
             <td>{{ entity.content }}</td>
-            <td>{{ entity.messageid }}</td>
             <td>{% if entity.published %}{{ entity.published|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>
                 <ul>
