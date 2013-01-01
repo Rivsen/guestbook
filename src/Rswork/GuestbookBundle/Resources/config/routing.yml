@@ -5,3 +5,7 @@ rswork_guestbook_homepage:
 RsworkGuestbookBundle_guestbook:
     resource: "@RsworkGuestbookBundle/Resources/config/routing/message.yml"
     prefix:   /guestbook
+
+RsworkGuestbookBundle_guestbook_comment:
+    resource: "@RsworkGuestbookBundle/Resources/config/routing/comment.yml"
+    prefix:   /guestbook/comment
