@@ -25,11 +25,45 @@
     {{ entity.content }}
     </p>
 
-      <a class="btn" href="{{ path('guestbook_edit', { 'id': entity.id }) }}">Edit</a>
-      <form action="{{ path('guestbook_delete', { 'id': entity.id }) }}" method="post" class="delete_button_form">
-        {{ form_widget(delete_form) }}
-        <button class="btn btn-danger" type="submit">Delete</button>
-      </form>
+    <a class="btn" href="{{ path('guestbook_edit', { 'id': entity.id }) }}">Edit</a>
+
+    <form action="{{ path('guestbook_delete', { 'id': entity.id }) }}" method="post" class="delete_button_form">
+      {{ form_widget(delete_form) }}
+      <button class="btn btn-danger" type="submit">Delete</button>
+    </form>
+
+    <hr />
+    <h4>Comments</h4>
+    {% if comments == false %}
+    <p>No comments yet.</p>
+    {% else %}
+      {% for comment in comments %}
+      <div>
+        <p class="info">
+        <i class="icon-user"></i> Author: <strong>{{ comment.author }}</strong> 
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <i class="icon-time"></i> Create Date: <strong>{{ comment.published|date('Y-m-d H:i:s') }}</strong>
+        </p>
+
+        <p>{{ comment.content }}</p>
+
+        <p>
+          <a href="{{ path('guestbook_comment_delete', { 'id': comment.id, 'message_id': entity.id }) }}" class="btn btn-small">delete</a>
+        </p>
+      </div>
+      {% endfor %}
+    {% endif %}
+
+    <hr />
+
+    <h4>Add a Comment</h4>
+
+    <form action="{{ path('guestbook_comment_create', {'message_id': entity.id}) }}" method="post" {{ form_enctype(comment_form) }}>
+      {{ form_widget(comment_form) }}
+      <p>
+      <button type="submit">Submit</button>
+      </p>
+    </form>
 
   </div>
 

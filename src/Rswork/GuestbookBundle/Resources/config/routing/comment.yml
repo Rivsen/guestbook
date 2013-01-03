@@ -1,0 +1,30 @@
+guestbook_comment:
+    pattern:  /
+    defaults: { _controller: "RsworkGuestbookBundle:Comment:index" }
+
+guestbook_comment_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "RsworkGuestbookBundle:Comment:show" }
+
+guestbook_comment_new:
+    pattern:  /new
+    defaults: { _controller: "RsworkGuestbookBundle:Comment:new" }
+
+guestbook_comment_create:
+    pattern:  /create
+    defaults: { _controller: "RsworkGuestbookBundle:Comment:create" }
+    requirements: { _method: post }
+
+guestbook_comment_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "RsworkGuestbookBundle:Comment:edit" }
+
+guestbook_comment_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "RsworkGuestbookBundle:Comment:update" }
+    requirements: { _method: post }
+
+guestbook_comment_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "RsworkGuestbookBundle:Comment:delete" }
+    requirements: { _method: get }

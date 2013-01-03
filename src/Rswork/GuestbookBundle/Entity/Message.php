@@ -4,6 +4,7 @@ namespace Rswork\GuestbookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use \DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Message
@@ -50,9 +51,20 @@ class Message
      */
     private $content;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="message_id")
+     */
+    protected $comments;
+
     public function __construct()
     {
         $this->published = new DateTime();
+        $this->comments = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 
 
@@ -156,5 +168,38 @@ class Message
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \Rswork\GuestbookBundle\Entity\Comment $comments
+     * @return Message
+     */
+    public function addComment(\Rswork\GuestbookBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+    
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \Rswork\GuestbookBundle\Entity\Comment $comments
+     */
+    public function removeComment(\Rswork\GuestbookBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
