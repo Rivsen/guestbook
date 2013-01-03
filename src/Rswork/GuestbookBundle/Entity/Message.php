@@ -4,7 +4,7 @@ namespace Rswork\GuestbookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use \DateTime;
-use Doctrine\Common\Collection\ArrayCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Message

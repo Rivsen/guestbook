@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Rswork\GuestbookBundle\Entity\Message;
 use Rswork\GuestbookBundle\Form\MessageType;
+use Rswork\GuestbookBundle\Entity\Comment;
+use Rswork\GuestbookBundle\Form\CommentType;
 
 /**
  * Message controller.
@@ -43,10 +45,21 @@ class MessageController extends Controller
             throw $this->createNotFoundException('Unable to find Message entity.');
         }
 
+        $comments = $entity->getComments();
+
+        if (count($comments) == 0) {
+            $comments = false;
+        }
+
+        $commentEntity = new Comment($entity);
+        $commentForm = $this->createForm(new CommentType(), $commentEntity);
+
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('RsworkGuestbookBundle:Message:show.html.twig', array(
             'entity'      => $entity,
+            'comments'      => $comments,
+            'comment_form'      => $commentForm->createView(),
             'delete_form' => $deleteForm->createView(),        ));
     }
 
@@ -160,6 +173,12 @@ class MessageController extends Controller
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Message entity.');
+            }
+
+            $comments = $entity->getComments();
+
+            foreach( $comments as $comment ) {
+                $em->remove($comment);
             }
 
             $em->remove($entity);

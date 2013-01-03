@@ -3,6 +3,7 @@
 namespace Rswork\GuestbookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use \DateTime;
 
 /**
  * Comment
@@ -47,6 +48,12 @@ class Comment
      * @ORM\JoinColumn(name="message_id", referencedColumnName="id")
      */
     protected $message_id;
+
+    public function __construct( $message )
+    {
+        $this->published = new DateTime();
+        $this->message_id = $message;
+    }
 
 
     /**

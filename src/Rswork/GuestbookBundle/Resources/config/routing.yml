@@ -8,4 +8,4 @@ RsworkGuestbookBundle_guestbook:
 
 RsworkGuestbookBundle_guestbook_comment:
     resource: "@RsworkGuestbookBundle/Resources/config/routing/comment.yml"
-    prefix:   /guestbook/comment
+    prefix:   /guestbook/{message_id}/comment

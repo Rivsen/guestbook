@@ -27,4 +27,4 @@ guestbook_comment_update:
 guestbook_comment_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "RsworkGuestbookBundle:Comment:delete" }
-    requirements: { _method: post }
+    requirements: { _method: get }
