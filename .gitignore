@@ -7,6 +7,8 @@ vendor/*
 */cache/*
 php/uploads/*
 php/bundles/*
+web/uploads/*
+web/bundles/*
 
 # Configuration files
 app/config/parameters.ini
