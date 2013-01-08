@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Rswork\GuestbookBundle\RsworkGuestbookBundle(),
             new Braincrafted\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Rswork\AdminBundle\RsworkAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

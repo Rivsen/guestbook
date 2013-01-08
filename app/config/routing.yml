@@ -1,3 +1,7 @@
+rswork_admin:
+    resource: "@RsworkAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
 rswork_guestbook:
     resource: "@RsworkGuestbookBundle/Resources/config/routing.yml"
     prefix:   /
