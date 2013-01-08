@@ -32,7 +32,7 @@
 
       <a href="{{ path('guestbook_show', { 'id': entity.id }) }}" class="btn">View Detail »</a>
       <a href="{{ path('guestbook_edit', { 'id': entity.id }) }}" class="btn">Edit</a>
-      <a href="{{ path('guestbook_show', { 'id': entity.id }) }}#comments" class="btn">Comments</a>
+      <a href="{{ path('guestbook_show', { 'id': entity.id }) }}#comments" class="btn">Comments({{ entity.comments.count }})</a>
     </div>
 
     {% endfor %}
