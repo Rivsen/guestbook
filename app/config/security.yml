@@ -26,6 +26,16 @@ security:
             pattern:  ^/demo/secured/login$
             security: false
 
+        admin_login: 
+            pattern:  ^/admin/login$
+            security: false
+
+        admin_area:
+            pattern: ^/admin
+            form_login:
+                login_path: /admin/login
+                check_path: /admin/login_check
+
         secured_area:
             pattern:    ^/demo/secured/
             form_login:
@@ -41,3 +51,4 @@ security:
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
+        - {path: ^/admin, roles: ROLE_ADMIN}
