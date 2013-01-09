@@ -4,6 +4,8 @@ namespace Rswork\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+#use Symfony\Component\Security\Core\SecurityContext;
+#use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 use Rswork\AdminBundle\Entity\User;
 use Rswork\AdminBundle\Form\UserType;
@@ -77,6 +79,7 @@ class UserController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setPassword( $this->get('security.encoder_factory')->getEncoder($entity)->encodePassword($entity->getPassword(), $entity->getSalt()) );
             $em->persist($entity);
             $em->flush();
 

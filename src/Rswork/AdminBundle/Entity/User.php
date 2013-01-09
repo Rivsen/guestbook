@@ -61,7 +61,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->isActive = true;
-        $this->salt = md5(null, true);
+        $this->salt = md5(uniqid(null));
     }
 
     /**
@@ -191,10 +191,11 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return array('ROLE_ADMIN');
     }
 
     public function eraseCredentials()
     {
+        $this->setPassword('');
     }
 }
