@@ -1,0 +1,30 @@
+admin:
+    pattern:  /
+    defaults: { _controller: "RsworkAdminBundle:User:index" }
+
+admin_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "RsworkAdminBundle:User:show" }
+
+admin_new:
+    pattern:  /new
+    defaults: { _controller: "RsworkAdminBundle:User:new" }
+
+admin_create:
+    pattern:  /create
+    defaults: { _controller: "RsworkAdminBundle:User:create" }
+    requirements: { _method: post }
+
+admin_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "RsworkAdminBundle:User:edit" }
+
+admin_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "RsworkAdminBundle:User:update" }
+    requirements: { _method: post }
+
+admin_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "RsworkAdminBundle:User:delete" }
+    requirements: { _method: post }

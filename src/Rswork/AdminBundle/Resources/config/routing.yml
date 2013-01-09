@@ -4,3 +4,7 @@ rswork_admin_login:
 
 rswork_admin_login_check:
     pattern:  /login_check
+
+RsworkAdminBundle_admin:
+    resource: "@RsworkAdminBundle/Resources/config/routing/user.yml"
+    prefix:   /user
