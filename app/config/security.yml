@@ -3,8 +3,6 @@ jms_security_extra:
     expressions: true
 
 security:
-    acl:
-        connection: default
 
     encoders:
         Rswork\AdminBundle\Entity\User:
@@ -58,4 +56,4 @@ security:
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
-        - {path: ^/admin, roles: ROLE_ADMIN}
+#- {path: ^/admin, roles: ROLE_ADMIN}

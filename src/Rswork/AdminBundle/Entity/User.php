@@ -4,6 +4,7 @@ namespace Rswork\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User
@@ -57,11 +58,28 @@ class User implements UserInterface
      */
     private $isActive;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
+     * @ORM\JoinTable(name="user_role",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
+     * )
+     */
+    private $roles;
+
 
     public function __construct()
     {
         $this->isActive = true;
         $this->salt = md5(uniqid(null));
+        $this->roles = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->username;
     }
 
     /**
@@ -191,11 +209,34 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return array('ROLE_ADMIN');
+        return $this->roles;
     }
 
     public function eraseCredentials()
     {
         $this->setPassword('');
+    }
+
+    /**
+     * Add roles
+     *
+     * @param \Rswork\AdminBundle\Entity\Role $roles
+     * @return User
+     */
+    public function addRole(\Rswork\AdminBundle\Entity\Role $roles)
+    {
+        $this->roles[] = $roles;
+    
+        return $this;
+    }
+
+    /**
+     * Remove roles
+     *
+     * @param \Rswork\AdminBundle\Entity\Role $roles
+     */
+    public function removeRole(\Rswork\AdminBundle\Entity\Role $roles)
+    {
+        $this->roles->removeElement($roles);
     }
 }

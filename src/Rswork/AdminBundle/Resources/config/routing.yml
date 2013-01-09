@@ -8,3 +8,7 @@ rswork_admin_login_check:
 RsworkAdminBundle_admin:
     resource: "@RsworkAdminBundle/Resources/config/routing/user.yml"
     prefix:   /user
+
+RsworkAdminBundle_admin_roles:
+    resource: "@RsworkAdminBundle/Resources/config/routing/role.yml"
+    prefix:   /roles

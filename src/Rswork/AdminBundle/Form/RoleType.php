@@ -6,28 +6,26 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UserType extends AbstractType
+class RoleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('password')
-            ->add('roles')
-            ->add('email')
-            ->add('isActive')
+            ->add('name')
+            ->add('role')
+            ->add('users')
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Rswork\AdminBundle\Entity\User'
+            'data_class' => 'Rswork\AdminBundle\Entity\Role'
         ));
     }
 
     public function getName()
     {
-        return 'rswork_adminbundle_usertype';
+        return 'rswork_adminbundle_roletype';
     }
 }

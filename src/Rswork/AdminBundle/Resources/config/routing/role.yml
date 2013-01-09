@@ -1,0 +1,30 @@
+admin_roles:
+    pattern:  /
+    defaults: { _controller: "RsworkAdminBundle:Role:index" }
+
+admin_roles_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "RsworkAdminBundle:Role:show" }
+
+admin_roles_new:
+    pattern:  /new
+    defaults: { _controller: "RsworkAdminBundle:Role:new" }
+
+admin_roles_create:
+    pattern:  /create
+    defaults: { _controller: "RsworkAdminBundle:Role:create" }
+    requirements: { _method: post }
+
+admin_roles_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "RsworkAdminBundle:Role:edit" }
+
+admin_roles_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "RsworkAdminBundle:Role:update" }
+    requirements: { _method: post }
+
+admin_roles_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "RsworkAdminBundle:Role:delete" }
+    requirements: { _method: post }
