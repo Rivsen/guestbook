@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="role")
  * @ORM\Entity(repositoryClass="Rswork\AdminBundle\Entity\RoleRepository")
  */
-class Role implements RoleInterface
+class Role implements RoleInterface, \Serializable
 {
     /**
      * @var integer
@@ -50,6 +50,33 @@ class Role implements RoleInterface
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        /*
+         * ! Don't serialize $users field !
+         */
+        return \serialize(array(
+            $this->id,
+            $this->name,
+            $this->role
+        ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->name,
+            $this->role
+        ) = \unserialize($serialized);
     }
 
     /**

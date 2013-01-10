@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Rswork\AdminBundle\Entity\UserRepository")
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @var integer
@@ -248,5 +248,38 @@ class User implements UserInterface
     public function getUserRoles()
     {
         return $this->userRoles;
+    }
+
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        /*
+         * ! Don't serialize $roles field !
+         */
+        return \serialize(array(
+            $this->id,
+            $this->username,
+            $this->email,
+            $this->salt,
+            $this->password,
+            $this->isActive
+        ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->email,
+            $this->salt,
+            $this->password,
+            $this->isActive
+        ) = \unserialize($serialized);
     }
 }
