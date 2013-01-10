@@ -67,14 +67,14 @@ class User implements UserInterface
      *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
      * )
      */
-    private $roles;
+    private $userRoles;
 
 
     public function __construct()
     {
         $this->isActive = true;
         $this->salt = md5(uniqid(null));
-        $this->roles = new ArrayCollection();
+        $this->userRoles = new ArrayCollection();
     }
 
     public function __toString()
@@ -209,7 +209,7 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return $this->roles;
+        return $this->userRoles->toArray();
     }
 
     public function eraseCredentials()
@@ -218,25 +218,35 @@ class User implements UserInterface
     }
 
     /**
-     * Add roles
+     * Add userRoles
      *
-     * @param \Rswork\AdminBundle\Entity\Role $roles
+     * @param \Rswork\AdminBundle\Entity\Role $userRoles
      * @return User
      */
-    public function addRole(\Rswork\AdminBundle\Entity\Role $roles)
+    public function addUserRole(\Rswork\AdminBundle\Entity\Role $userRoles)
     {
-        $this->roles[] = $roles;
+        $this->userRoles[] = $userRoles;
     
         return $this;
     }
 
     /**
-     * Remove roles
+     * Remove userRoles
      *
-     * @param \Rswork\AdminBundle\Entity\Role $roles
+     * @param \Rswork\AdminBundle\Entity\Role $userRoles
      */
-    public function removeRole(\Rswork\AdminBundle\Entity\Role $roles)
+    public function removeUserRole(\Rswork\AdminBundle\Entity\Role $userRoles)
     {
-        $this->roles->removeElement($roles);
+        $this->userRoles->removeElement($userRoles);
+    }
+
+    /**
+     * Get userRoles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserRoles()
+    {
+        return $this->userRoles;
     }
 }
